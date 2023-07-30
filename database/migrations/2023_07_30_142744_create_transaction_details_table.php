@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaction_id')->constrained('transactions');
+            $table->integer('in');
+            $table->integer('out');
+            $table->integer('request_amount');
+            $table->integer('receive_amount');
+            $table->foreignId('drug_id')->constrained('drugs');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
