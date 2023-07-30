@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  database:
+    container_name: gudang_obat
+    restart: always
+    image: 'mysql:5.7'
+    environment: 
+      MYSQL_DATABASE: "gudang_obat"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_ROOT_PASSWORD: "secret"
+    volumes:
+      - './db:/var/lib/mysql'
+    ports:
+      - 3306:3306
+volumes:
+  database:
