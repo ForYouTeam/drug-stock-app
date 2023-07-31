@@ -15,7 +15,7 @@
               <li class="sidebar-title">Menu</li>
 
               <li class="sidebar-item active ">
-                  <a href="index.html" class='sidebar-link'>
+                  <a href="{{'/'}}" class='sidebar-link'>
                       <i class="bi bi-grid-fill"></i>
                       <span>Dashboard</span>
                   </a>
@@ -24,33 +24,41 @@
               <li class="sidebar-title">Data</li>
 
               <li class="sidebar-item  ">
-                  <a href="form-layout.html" class='sidebar-link'>
-                      <i class="bi bi-file-earmark-medical-fill"></i>
+                  <a href="{{'/werehouse'}}" class='sidebar-link'>
+                    <i class="bi-house-door-fill mt-1"></i>
                       <span>Gudang</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                  <a href="table.html" class='sidebar-link'>
-                      <i class="bi bi-droplet-fill"></i>
+                  <a href="{{'/drugs'}}" class='sidebar-link'>
+                      <i class="bi bi-droplet-fill mt-1"></i>
                       <span>Obat</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                  <a href="table-datatable.html" class='sidebar-link'>
-                      <i class="fa fa-folder"></i>
+                  <a href="{{'/staff'}}" class='sidebar-link'>
+                    <i class="bi-person-fill mt-1"></i>
                       <span>Staff</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                <a href="table-datatable.html" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                <a href="{{'/transaction'}}" class='sidebar-link'>
+                    <i class="bi-arrow-down-up mt-1"></i>
                     <span>Transaksi</span>
                 </a>
               </li>
 
+              <li class="sidebar-title">Settings</li>
+
+              <li class="sidebar-item  ">
+                <a href="{{'/akun'}}" class='sidebar-link'>
+                    <i class="bi-person-plus-fill mt-1"></i>
+                    <span>Manajemen Akun</span>
+                </a>
+              </li>
           </ul>
       </div>
       <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
