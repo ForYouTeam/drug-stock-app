@@ -15,3 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/transaction', function () {
+    return view('Pages/Transactions');
+});
+
+Route::get('/drugs', function () {
+    return view('Pages/Drugs');
+});
+
+Route::get('/staff', function () {
+    return view('Pages/Staff');
+});
+
+Route::get('/werehouse', function () {
+    return view('Pages/Wherehouse');
+});
+
+Route::get('/akun', function () {
+    return view('Pages/Acount');
+});

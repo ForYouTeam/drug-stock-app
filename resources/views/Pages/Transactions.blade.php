@@ -1,6 +1,6 @@
 @extends('layout.Base')
 @section('title')
-    Gudang
+    Transaksi
 @endsection
 @section('content')
 <div class="page-heading">
