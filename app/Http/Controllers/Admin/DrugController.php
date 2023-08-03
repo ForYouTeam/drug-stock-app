@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DrugRequest;
 use App\Interfaces\DrugInterface;
 use App\Repositories\DrugRepository;
 use Illuminate\Http\JsonResponse;
@@ -36,7 +37,7 @@ class DrugController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function upsertData(Request $request)
+    public function upsertData(DrugRequest $request)
     {
         $payloadId = $request->id | null;
         $payload = array(
