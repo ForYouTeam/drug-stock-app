@@ -1,4 +1,6 @@
 /node_modules
+/deployment
+/mydb
 /public/build
 /public/hot
 /public/storage
