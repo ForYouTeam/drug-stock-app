@@ -12,4 +12,9 @@ class Transaction extends Model
     protected $fillable = [
         'warehouse_id', 'total_in','total_out','created_at', 'updated_at'
     ];
+
+    public function drugs()
+    {
+        return $this->belongsTo(Drug::class, '');
+    }
 }
