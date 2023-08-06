@@ -24,28 +24,28 @@
               <li class="sidebar-title">Data</li>
 
               <li class="sidebar-item  ">
-                  <a href="{{'/werehouse'}}" class='sidebar-link'>
+                  <a href="{{route('warehouse')}}" class='sidebar-link'>
                     <i class="bi-house-door-fill mt-1"></i>
                       <span>Gudang</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                  <a href="{{'/drugs'}}" class='sidebar-link'>
+                  <a href="{{route('drugs')}}" class='sidebar-link'>
                       <i class="bi bi-droplet-fill mt-1"></i>
                       <span>Obat</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                  <a href="{{'/staff'}}" class='sidebar-link'>
+                  <a href="{{route('staff')}}" class='sidebar-link'>
                     <i class="bi-person-fill mt-1"></i>
                       <span>Staff</span>
                   </a>
               </li>
 
               <li class="sidebar-item  ">
-                <a href="{{'/transaction'}}" class='sidebar-link'>
+                <a href="{{route('transaction')}}" class='sidebar-link'>
                     <i class="bi-arrow-down-up mt-1"></i>
                     <span>Transaksi</span>
                 </a>

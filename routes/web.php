@@ -22,14 +22,9 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
 Route::get('/warehouses', [WarehouseController::class, 'index'])->name('warehouse');
 Route::get('/staff', [StaffController::class, 'index'])->name('staff');
+Route::get('/transaction', [StaffController::class, 'index'])->name('transaction');
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
-
-Route::get('/transaction', function () {
-    return view('Pages/Transactions');
-});
-
-
 
 Route::get('/akun', function () {
     return view('Pages/Acount');
