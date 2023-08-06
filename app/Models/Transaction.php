@@ -10,11 +10,16 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'warehouse_id', 'total_in','total_out','created_at', 'updated_at'
+        'warehouse_id', 'receiver_id', 'total_in','total_out','created_at', 'updated_at'
     ];
 
     public function drugs()
     {
         return $this->belongsTo(Drug::class, '');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(Receiver::class);
     }
 }

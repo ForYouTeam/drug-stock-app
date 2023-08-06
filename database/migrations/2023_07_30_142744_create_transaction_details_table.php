@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaction_id')->constrained('transactions');
-            $table->integer('in');
-            $table->integer('out');
-            $table->integer('request_amount');
-            $table->integer('receive_amount');
+            $table->integer('in')->nullable();
+            $table->integer('out')->nullable();
+            $table->integer('request_amount')->nullable();
+            $table->integer('receive_amount')->nullable();
             $table->foreignId('drug_id')->constrained('drugs');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
