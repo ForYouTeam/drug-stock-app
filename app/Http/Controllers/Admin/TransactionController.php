@@ -5,34 +5,36 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Repositories\TransactionRepository;
+use App\Repositories\WarehouseRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    private TransactionRepository $repo;
-    public function __construct(TransactionRepository $repo)
+    private TransactionRepository $transaksiRepo;
+    private WarehouseRepository $warehouseRepo;
+    public function __construct(TransactionRepository $transaksiRepo, WarehouseRepository $warehouseRepo)
     {
-        $this->repo = $repo;
+        $this->transaksiRepo = $transaksiRepo;
+        $this->warehouseRepo = $warehouseRepo;
     }
 
     public function index()
     {
-        $data = $this->getAllData();
-
-        return view()->with('data', $data['data']);
+        $warehouse = $this->warehouseRepo->getAllPayload([]);
+        return view('Pages.Transactions')->with('warehouse', $warehouse['data']);
     }
 
     public function getAllData(): JsonResponse
     {
-        $data = $this->repo->getAllPayload([]);
+        $data = $this->transaksiRepo->getAllPayload([]);
 
         return response()->json($data, $data['code']);
     }
 
     public function getDataById($id)
     {
-        $data = $this->repo->getByIdPayload($id);
+        $data = $this->transaksiRepo->getByIdPayload($id);
         return response()->json($data, $data['code']);
     }
 
@@ -45,13 +47,13 @@ class TransactionController extends Controller
             'total_out' => $request->total_out
         );
 
-        $data = $this->repo->upsertPayload($payloadId ,$payload);
+        $data = $this->transaksiRepo->upsertPayload($payloadId ,$payload);
         return response()->json($data, $data['code']);
     }
 
     public function deleteData($id)
     {
-        $data = $this->repo->deletePayload($id);
+        $data = $this->transaksiRepo->deletePayload($id);
         return response()->json($data, $data['code']);
     }
 }

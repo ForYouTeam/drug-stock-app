@@ -14,9 +14,11 @@
 <script src="{{asset('assets/vendors/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/vendors/apexcharts/apexcharts.js')}}"></script>
-<script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 <script src="{{asset('assets/vendors/simple-datatables/simple-datatables.js')}}"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+<script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
+<script src="{{ asset('assets/izitoast/js/iziToast.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js" integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
