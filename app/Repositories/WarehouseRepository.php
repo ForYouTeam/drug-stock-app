@@ -12,11 +12,10 @@ class WarehouseRepository implements WarehouseInterface
   public function getAllPayload($query)
   {
     try {
-      $data = Warehouse::all();
+      $data = Warehouse::with('drugs')->get();
       $meta = Warehouse::count();
 
       $response = ApiResponse::successRes($data, "success get data", 200, ['total' => $meta]);
-
     } catch (\Throwable $th) {
       $response = ApiResponse::errRes($th->getMessage(), 500, "get all payload | warehouses");
     }
@@ -28,13 +27,12 @@ class WarehouseRepository implements WarehouseInterface
   {
     try {
       $find = Warehouse::whereId($paylaodId)->first();
-      
+
       if ($find) {
         $response = ApiResponse::successRes($find, "success get data", 200);
       } else {
         $response = ApiResponse::errRes("not found warehouses", 404);
       }
-      
     } catch (\Throwable $th) {
       $response = ApiResponse::errRes($th->getMessage(), 500, "get by id payload | warehouses");
     }
@@ -57,7 +55,6 @@ class WarehouseRepository implements WarehouseInterface
         $payload['updated_at'] = $date;
         $update   = Warehouse::whereId($paylaodId)->update($payload);
         $response = ApiResponse::successRes($update, "success update data", 200);
-
       } else {
 
         $payload['created_at'] = $date;
@@ -65,7 +62,6 @@ class WarehouseRepository implements WarehouseInterface
         $created  = Warehouse::create($payload);
         $response = ApiResponse::successRes($created, "success create data", 200);
       }
-
     } catch (\Throwable $th) {
       $response = ApiResponse::errRes($th->getMessage(), 500, "get upsert payload | warehouses");
     }
@@ -87,7 +83,7 @@ class WarehouseRepository implements WarehouseInterface
     } catch (\Throwable $th) {
       $response = ApiResponse::errRes($th->getMessage(), 500, "get upsert payload | warehouses");
     }
-    
+
     return $response;
   }
 }

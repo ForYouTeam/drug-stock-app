@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StaffRequest;
 use App\Repositories\StaffRepository;
 use App\Interfaces\StaffInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -20,8 +21,8 @@ class StaffController extends Controller
     public function index()
     {
         $data = $this->getAllData();
-
-        return view()->with('data', $data['data']);
+        $user = User::all();
+        return view('Pages.Staff')->with(['data' => $data, 'user' => $user]);
     }
 
     public function getAllData(): JsonResponse
@@ -46,7 +47,7 @@ class StaffController extends Controller
             'user_id' => $request->user_id
         );
 
-        $data = $this->repo->upsertPayload($payloadId ,$payload);
+        $data = $this->repo->upsertPayload($payloadId, $payload);
         return response()->json($data, $data['code']);
     }
 

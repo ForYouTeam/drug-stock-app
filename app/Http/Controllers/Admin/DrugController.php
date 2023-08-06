@@ -19,9 +19,8 @@ class DrugController extends Controller
 
     public function index()
     {
-        $data = $this->getAllData();
-
-        return view()->with('data', $data['data']);
+        $data = $this->getAllData([]);
+        return view('Pages.Drugs')->with('data', $data);
     }
 
     public function getAllData(): JsonResponse
@@ -44,7 +43,7 @@ class DrugController extends Controller
             'name' => $request->name
         );
 
-        $data = $this->repo->upsertPayload($payloadId ,$payload);
+        $data = $this->repo->upsertPayload($payloadId, $payload);
         return response()->json($data, $data['code']);
     }
 
