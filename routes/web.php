@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
 
+Route::group(['middleware' => ['auth']], function () {
+    
+});
 Route::get('/transaction', function () {
     return view('Pages/Transactions');
 });
