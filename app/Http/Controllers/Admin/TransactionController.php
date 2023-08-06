@@ -43,6 +43,7 @@ class TransactionController extends Controller
         $payloadId = $request->id | null;
         $payload = array(
             'warehouse_id' => $request->warehouse_id,
+            'receiver_id' => $request->receiver_id,
             'total_in' => $request->total_in,
             'total_out' => $request->total_out
         );
