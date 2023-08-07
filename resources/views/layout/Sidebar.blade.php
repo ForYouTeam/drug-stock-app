@@ -30,6 +30,13 @@
                   </a>
               </li>
 
+              <li class="sidebar-item {{ (request()->is('receiver')) ? 'active' : '' }} ">
+                <a href="{{route('receiver')}}" class='sidebar-link'>
+                  <i class="bi-house-door-fill mt-1"></i>
+                    <span>Penerima</span>
+                </a>
+            </li>
+
               <li class="sidebar-item {{ (request()->is('drugs')) ? 'active' : '' }} ">
                   <a href="{{route('drugs')}}" class='sidebar-link'>
                       <i class="bi bi-droplet-fill mt-1"></i>

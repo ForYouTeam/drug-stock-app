@@ -52,3 +52,10 @@ Route::prefix('v1/user')->controller(UserController::class)->group(function() {
     Route::post('/', 'upsertData');
     Route::delete('/{id}', 'deleteData');
 });
+
+Route::prefix('v1/receiver')->controller(ReceiverController::class)->group(function() {
+    Route::get('/', 'getAllData');
+    Route::get('/{id}', 'getDataById');
+    Route::post('/', 'upsertData');
+    Route::delete('/{id}', 'deleteData');
+});

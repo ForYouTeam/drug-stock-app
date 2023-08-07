@@ -19,7 +19,7 @@ class ReceiverController extends Controller
     public function index()
     {
         $data = $this->getAllData([]);
-        return view('Pages.Drugs')->with('data', $data);
+        return view('Pages.Receiver')->with('data', $data);
     }
 
     public function getAllData(): JsonResponse
