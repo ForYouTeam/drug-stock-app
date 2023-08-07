@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DrugController;
+use App\Http\Controllers\Admin\ReceiverController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\WarehouseController;
@@ -24,6 +25,7 @@ Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
 Route::get('/warehouses', [WarehouseController::class, 'index'])->name('warehouse');
 Route::get('/staff', [StaffController::class, 'index'])->name('staff');
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
 
