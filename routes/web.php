@@ -27,6 +27,7 @@ Route::get('/transaction', [TransactionController::class, 'index'])->name('trans
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
 
+
 Route::get('/akun', function () {
     return view('Pages/Acount');
 });

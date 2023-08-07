@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DrugController;
+use App\Http\Controllers\Admin\ReceiverController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TransactionController;

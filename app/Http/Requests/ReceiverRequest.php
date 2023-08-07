@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TransactionRequest extends FormRequest
+class ReceiverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,9 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'warehouse_id' => 'required',
-            'receiver_id' => 'required',
-            'total_in' => 'required',
-            'total_out' => 'required',
+            'nama' => 'required|min:2|max:150',
+            'jenis' => 'required|min:2|max:150',
+            'alamat' => 'required|min:2|max:150',
         ];
     }
 
