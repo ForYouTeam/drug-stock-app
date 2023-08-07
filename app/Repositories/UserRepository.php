@@ -6,6 +6,7 @@ use App\Helper\ApiResponse;
 use App\Interfaces\UserInterface;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserInterface
 {
@@ -46,7 +47,7 @@ class UserRepository implements UserInterface
   {
     try {
       $date = Carbon::now();
-
+      $hash = Hash::make($payload['password']);
       if ($paylaodId) {
 
         $find = $this->getByIdPayload($paylaodId);
@@ -55,6 +56,7 @@ class UserRepository implements UserInterface
         }
 
         $payload['updated_at'] = $date;
+        $payload['password'] = $hash;
         $update   = User::whereId($paylaodId)->update($payload);
         $response = ApiResponse::successRes($update, "success update data", 200);
 
@@ -62,6 +64,7 @@ class UserRepository implements UserInterface
 
         $payload['created_at'] = $date;
         $payload['updated_at'] = $date;
+        $payload['password'] = $hash;
         $created  = User::create($payload);
         $response = ApiResponse::successRes($created, "success create data", 200);
       }
