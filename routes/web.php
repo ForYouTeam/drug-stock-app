@@ -28,6 +28,7 @@ Route::get('/transaction', [TransactionController::class, 'index'])->name('trans
 Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
+Route::get('/auth/process', [AuthController::class, 'login'])->name('login.process');
 
 
 Route::get('/akun', function () {

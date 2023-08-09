@@ -12,12 +12,12 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"></a>
+                        <a href="#" class="fs-3"><b>D-WAREHOUSE</b></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Silahkan login untuk masuk kedalam dashboard.</p>
 
-                    <form action="index.html">
+                    <form action="">
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Username">
                             <div class="form-control-icon">
