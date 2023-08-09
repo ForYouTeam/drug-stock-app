@@ -20,15 +20,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
-Route::get('/warehouses', [WarehouseController::class, 'index'])->name('warehouse');
-Route::get('/staff', [StaffController::class, 'index'])->name('staff');
-Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
-Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
+Route::group(['middleware' => ['auth']], function() {
+  
+    Route::get('/logout', [AuthController::class, 'perform'])->name('logout.perform');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/drugs', [DrugController::class, 'index'])->name('drugs');
+    Route::get('/warehouses', [WarehouseController::class, 'index'])->name('warehouse');
+    Route::get('/staff', [StaffController::class, 'index'])->name('staff');
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+    Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
+});
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
-Route::get('/auth/process', [AuthController::class, 'login'])->name('login.process');
+Route::post('/auth/process', [AuthController::class, 'login'])->name('login.process');
+
 
 
 Route::get('/akun', function () {

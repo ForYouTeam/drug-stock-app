@@ -19,8 +19,11 @@ class AuthController extends Controller
         $credentials = $request->getCredentials();
 
         if(!Auth::validate($credentials)):
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
+
+            return redirect()->to('auth')
+                ->withErrors([
+                    'email' => "Periksa Kembali Username dan Password anda",
+                ]);
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
@@ -32,13 +35,13 @@ class AuthController extends Controller
 
     protected function authenticated(Request $request, $user) 
     {
-        return redirect()->intended();
+        return redirect()->intended('/');
     }
 
     public function perform()
     {
         Session::flush();
         Auth::logout();
-        return redirect('login');
+        return redirect('auth');
     }
 }
