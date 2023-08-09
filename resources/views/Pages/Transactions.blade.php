@@ -55,29 +55,6 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              {{-- <div>
-                <div class="form-group">
-                    <input type="hidden" name="id" id="id">
-                    <label for="">Obat</label>
-                    <select name="warehouse_id" id="warehouse_id" class="form-select">
-                        <option value="" selected disabled>-- Pilih Obat --</option>
-                        @foreach ($warehouse as $w)
-                            <option value="{{$w->id}}">Stock : {{$w->stock}} | Obat : {{$w->drug_id}}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-danger" id="alert-name"></span>
-                </div>
-                <div class="form-group">
-                    <label for="">Stock Masuk</label>
-                    <input type="number" name="total_in" id="total_in" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
-                </div>
-                <div class="form-group">
-                    <label for="">Stock Keluar</label>
-                    <input type="number" name="total_out" id="total_out" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
-                </div>
-              </div> --}}
               <div class="row mx-2 mt-3">
                 <div class="col-lg-12">
                     <h4>Detail Transaksi Obat Masuk / Keluar</h4>
@@ -416,8 +393,7 @@
                             <td>${moment(d.created_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>${moment(d.updated_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>
-                            <button id="btn-edit" data-id="${d.id}" class="btn rounded btn-sm btn-outline-primary mr-1">Edit</button>
-                            <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
+                                <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
                             </td>
                         </tr>
                     `)
