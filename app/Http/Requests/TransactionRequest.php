@@ -26,10 +26,8 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'warehouse_id' => 'required',
-            'receiver_id' => 'required',
-            'total_in' => 'required',
-            'total_out' => 'required',
+            'receiver_id'     => 'required',
+            'jenis_transaksi' => 'required',
         ];
     }
 

@@ -12,7 +12,7 @@ class TransactionRepository implements TransactionInterface
   public function getAllPayload($query)
   {
     try {
-      $data = Transaction::all();
+      $data = Transaction::with('receiver')->get();
       $meta = Transaction::count();
 
       $response = ApiResponse::successRes($data, "success get data", 200, ['total' => $meta]);
