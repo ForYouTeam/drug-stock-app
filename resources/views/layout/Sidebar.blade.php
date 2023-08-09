@@ -2,8 +2,9 @@
   <div class="sidebar-wrapper active">
       <div class="sidebar-header">
           <div class="d-flex justify-content-between">
-              <div class="logo">
-                  <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+              <div class="pt-2" style="margin-bottom: -30px;">
+                  <a href="#" class="text-primary fs-2"><b>D-Warehouse</b></a>
+                  <span style="font-size: 15pt !important;"><p>Keep your inventory</p></span>
               </div>
               <div class="toggler">
                   <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>

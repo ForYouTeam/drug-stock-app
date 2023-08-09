@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('warehouse_id')->constrained('warehouses');
             $table->foreignId('receiver_id')->constrained('receivers');
             $table->integer('total_in')->nullable();
             $table->integer('total_out')->nullable();

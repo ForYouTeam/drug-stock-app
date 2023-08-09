@@ -1,6 +1,6 @@
 @extends('layout.Base')
 @section('title')
-    Obat
+    Transaksi
 @endsection
 @section('content')
 <div class="page-heading">
@@ -29,11 +29,13 @@
                 <table class="table table-hover" id="tabel-data">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th style="width: 5%">No</th>
                             <th>Name</th>
+                            <th>Total In</th>
+                            <th>Total Out</th>
                             <th>Created_at</th>
                             <th>Updated_at</th>
-                            <th>Action</th>
+                            <th style="width: 10%">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -46,34 +48,93 @@
       
       <!-- Modal -->
       <div class="modal fade" id="modal-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div>
-                <div class="form-group">
-                    <input type="hidden" name="id" id="id">
-                    <label for="">Gudang</label>
-                    <select name="warehouse_id" id="warehouse_id" class="form-select">
-                        <option value="">-- Pili Gudang --</option>
-                        @foreach ($warehouse as $w)
-                            <option value="{{$w->id}}">Stock : {{$w->stock}} | Obat : {{$w->drug_id}}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-danger" id="alert-name"></span>
+              <div class="row mx-2 mt-3">
+                <div class="col-lg-12">
+                    <h4>Detail Transaksi Obat Masuk / Keluar</h4>
                 </div>
-                <div class="form-group">
-                    <label for="">Stock Masuk</label>
-                    <input type="number" name="total_in" id="total_in" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
+                <div class="col-lg-12 pt-3">
+                    <div class="form-group">
+                        <label for="jenis_transaksi" class="form-label">Jenis Transaksi</label>
+                        <select id="jenis_transaksi" class="form-select">
+                            <option value="" selected disabled>-- Pilih Jenis Transaksi --</option>
+                            <option value="in">Masuk</option>
+                            <option value="out">Keluar</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="receiver_id" class="form-label">Pengirim/Penerima</label>
+                        <span class="small text-muted">Field ini menunjukan penerima obat jika transaksi keluar atau pengirim obat jika jenis transaksi masuk</span>
+                        <select id="receiver_id" class="form-select">
+                            <option value="" selected disabled>-- Pilih Pengirim/Penerima --</option>
+                            <option value="1">Puskesmas</option>
+                            <option value="2">Rumahsakit</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Stock Keluar</label>
-                    <input type="number" name="total_out" id="total_out" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5>Formulir</h5>
+                        <div class="form-group">
+                            <button class="btn btn-outline-primary" id="tambah-detail" disabled>Tambah Detail</button>
+                            <button class="btn btn-outline-danger" id="reset-detail">Reset</button>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="drug_id" class="form-label">Nama Obat</label>
+                                <select name="drug_id" id="drug_id" class="form-select">
+                                    <option value="" selected disabled>-- Pilih Obat --</option>
+                                    <option value="1" data-name="paracetamol">Paracetamol</option>
+                                </select>
+                                <span id="drug-same" class="text-danger mt-2 small"></span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="request_amount" class="form-label">Jumlah Permintaan</label>
+                                <input type="number" name="request_amount" id="request_amount" value="0" class="form-control" placeholder="--Input disini--">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="receive_amount" class="form-label">Jumlah Diterima / Diberikan</label>
+                                <input type="number" name="receive_amount" id="receive_amount" value="0" class="form-control" placeholder="--Input disini--">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-lg-12">
+                            <h5>Detail</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">No</th>
+                                        <th style="width: 40%">Nama Obat</th>
+                                        <th>Jumlah Permintaan</th>
+                                        <th>Jumlah Diterima/Diberikan</th>
+                                        <th style="width: 10%">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb-details">
+                                    {{-- <tr>
+                                        <td>1.</td>
+                                        <td>Paracetamol</td>
+                                        <td>25</td>
+                                        <td>15</td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">Hapus</button>
+                                        </td>
+                                    </tr> --}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -87,6 +148,107 @@
 </div>
 @endsection
 @section('script')
+    <script>
+        let detailPayloads = []
+
+        const drugInput          = document.getElementById('drug_id' )
+        const requestAmountInput = document.getElementById('request_amount' )
+        const receiveAmountInput = document.getElementById('receive_amount' )
+
+        function checkIfDrugReady() {
+            const find = detailPayloads.find(item => item.drug_id === drugInput.value);
+            if (find) {
+                $('#drug-same').html('Obat telah ditambahkan')
+            } else {
+                $('#drug-same').html('')
+            }
+            return find
+        }
+
+        const checkAndLog = () => {
+
+            if (!checkIfDrugReady() && drugInput.value != 0 && requestAmountInput.value != 0 && receiveAmountInput.value) {
+                $('#tambah-detail').prop('disabled', false);
+            } else {
+                $('#tambah-detail').prop('disabled', true);
+            }
+        }
+
+        drugInput.addEventListener('change', checkAndLog);
+        requestAmountInput.addEventListener('input', checkAndLog);
+        receiveAmountInput.addEventListener('input', checkAndLog);
+
+        function appendDetailsToTable(data) {
+            $('#tb-details').html('')
+            $.each(data, (i, d) => {
+                $('#tb-details').append(`
+                    <tr>
+                        <td>${i+1}.</td>
+                        <td>${d.drug_name}</td>
+                        <td>${d.request_amount}</td>
+                        <td>${d.receive_amount}</td>
+                        <td>
+                            <button data-id="drug-${d.drug_id}" class="btn btn-outline-danger delete-details">Hapus</button>
+                        </td>
+                    </tr>
+                `)
+            })
+        }
+
+        function addToDetails() {
+            const selectedOption = drugInput.options[drugInput.selectedIndex];
+            detailPayloads.push({
+                'drug_id'        : drugInput .value ,
+                'drug_name'      : selectedOption .getAttribute('data-name').toUpperCase(),
+                'request_amount' : requestAmountInput .value ,
+                'receive_amount' : receiveAmountInput .value ,
+            })
+            
+            appendDetailsToTable(detailPayloads)
+        }
+
+        function resetDetail() {
+            drugInput.value = ''
+            requestAmountInput.value = 0
+            receiveAmountInput.value = 0
+            $('#drug-same').html('')
+            $('#tambah-detail').prop('disabled', true);
+        }
+
+        $(document).on('click', '#tambah-detail', function() {
+            addToDetails()
+            resetDetail()
+        })
+
+        $(document).on('click', '#reset-detail', function() {
+            resetDetail()
+        })
+
+        $(document).on('click', '.delete-details', function() {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Hapus data dari daftar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let dataId = $(this).data('id').split('-')[1]
+                    const foundIndex = detailPayloads.findIndex(item => item.drug_id == dataId);
+
+                    detailPayloads.splice(foundIndex, 1);
+                    appendDetailsToTable(detailPayloads)
+                    checkIfDrugReady()
+                    checkAndLog()
+                }
+            })
+        })
+
+
+
+    </script>
     <script>
         const baseUrl = `{{ config('app.url') }}`
 
@@ -171,9 +333,12 @@
 
         function postData() {
             const data = {
-                id   : $('#id'   ).val(),
-                name : $('#name' ).val()
+                jenis_transaksi: $('#jenis_transaksi').val(),
+                receiver_id: $('#receiver_id').val(),
+                detail: detailPayloads
             }
+
+            console.log(data);
 
             $.ajax({
                 url        : `${baseUrl}/api/v1/transaction`,
@@ -187,6 +352,7 @@
                         position: 'bottomRight'
                     });
 
+                    console.log(res);
                     getAllData()
                 },
                 error: function(err) {
@@ -221,12 +387,13 @@
                     $('#tbody').append(`
                         <tr>
                             <td>${i + 1}</td>
-                            <td class="text-capitalize">${d.warehouses}</td>
+                            <td class="text-capitalize">${d.receiver.nama}</td>
+                            <td class="text-capitalize">${d.total_in}</td>
+                            <td class="text-capitalize">${d.total_out}</td>
                             <td>${moment(d.created_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>${moment(d.updated_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>
-                            <button id="btn-edit" data-id="${d.id}" class="btn rounded btn-sm btn-outline-primary mr-1">Edit</button>
-                            <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
+                                <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
                             </td>
                         </tr>
                     `)

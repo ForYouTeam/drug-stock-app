@@ -1,6 +1,6 @@
 @extends('layout.Base')
 @section('title')
-    Warehouse
+    Stok Obat
 @endsection
 @section('content')
 <div class="page-heading">

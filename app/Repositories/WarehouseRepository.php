@@ -40,6 +40,23 @@ class WarehouseRepository implements WarehouseInterface
     return $response;
   }
 
+  public function getByDrugId(int $paylaodId)
+  {
+    try {
+      $find = Warehouse::where('drug_id', $paylaodId)->first();
+
+      if ($find) {
+        $response = ApiResponse::successRes($find, "success get data", 200);
+      } else {
+        $response = ApiResponse::errRes("not found warehouses", 404);
+      }
+    } catch (\Throwable $th) {
+      $response = ApiResponse::errRes($th->getMessage(), 500, "get by drug id payload | warehouses");
+    }
+    
+    return $response;
+  }
+
   public function upsertPayload($paylaodId, array $payload)
   {
     try {

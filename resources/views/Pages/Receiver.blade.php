@@ -58,18 +58,22 @@
               <div>
                 <div class="form-group">
                     <input type="hidden" name="id" id="id">
-                    <label for="">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control mt-2" placeholder="Input disini">
+                    <label for="">Nama Rs/Puskes</label>
+                    <input type="text" name="nama" id="nama" class="form-control mt-2" placeholder="Input disini" autocomplete="off">
                     <span class="text-danger" id="alert-nama"></span>
                 </div>
                 <div class="form-group">
-                    <label for="">Jenis</label>
-                    <input type="text" name="jenis" id="jenis" class="form-control mt-2" placeholder="Input disini">
+                    <label for="">Jenis Penerima</label>
+                    <select name="jenis" id="jenis" class="form-select">
+                        <option selected disabled value="">-- Pilih --</option>
+                        <option value="rumah sakit">Rumah Sakit</option>
+                        <option value="puskesmas">Puskesmas</option>
+                    </select>
                     <span class="text-danger" id="alert-jenis"></span>
                 </div>
                 <div class="form-group">
                     <label for="">Alamat</label>
-                    <input type="text" name="alamat" id="alamat" class="form-control mt-2" placeholder="Input disini">
+                    <input type="text" name="alamat" id="alamat" class="form-control mt-2" placeholder="Input disini" autocomplete="off">
                     <span class="text-danger" id="alert-alamat"></span>
                 </div>
               </div>
