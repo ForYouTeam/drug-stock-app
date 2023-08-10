@@ -17,6 +17,8 @@ Route::prefix('v1/drug')->controller(DrugController::class)->group(function() {
     Route::delete('/{id}', 'deleteData');
 });
 
+Route::get('v1/drugsearch', [DrugController::class, 'searchDrug']);
+
 Route::prefix('v1/warehouse')->controller(WarehouseController::class)->group(function() {
     Route::get('/', 'getAllData');
     Route::get('/{id}', 'getDataById');

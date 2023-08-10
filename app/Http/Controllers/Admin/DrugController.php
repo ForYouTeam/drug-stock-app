@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DrugRequest;
 use App\Interfaces\DrugInterface;
+use App\Models\Drug;
 use App\Repositories\DrugRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,6 +35,15 @@ class DrugController extends Controller
     {
         $data = $this->repo->getByIdPayload($id);
         return response()->json($data, $data['code']);
+    }
+
+    public function searchDrug(Request $request){
+        $term = $request->input('term'); // Ambil kata kunci pencarian dari permintaan
+
+        // Lakukan pencarian berdasarkan kata kunci
+        $results = Drug::where('name', 'LIKE', "%$term%")->get();
+
+        return response()->json($results, 200);
     }
 
     public function upsertData(DrugRequest $request)

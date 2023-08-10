@@ -47,7 +47,7 @@
     </section>
       
       <!-- Modal -->
-      <div class="modal fade" id="modal-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-data" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -73,8 +73,9 @@
                         <span class="small text-muted">Field ini menunjukan penerima obat jika transaksi keluar atau pengirim obat jika jenis transaksi masuk</span>
                         <select id="receiver_id" class="form-select">
                             <option value="" selected disabled>-- Pilih Pengirim/Penerima --</option>
-                            <option value="1">Puskesmas</option>
-                            <option value="2">Rumahsakit</option>
+                            @foreach ($data['receiver'] as $item)
+                                <option value="{{$item['id']}}">{{$item['nama']}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -84,17 +85,15 @@
                     <div class="d-flex justify-content-between">
                         <h5>Formulir</h5>
                         <div class="form-group">
-                            <button class="btn btn-outline-primary" id="tambah-detail" disabled>Tambah Detail</button>
-                            <button class="btn btn-outline-danger" id="reset-detail">Reset</button>
+                            <button type="button" class="btn btn-outline-primary" id="tambah-detail" disabled>Tambah Detail</button>
+                            <button type="button" class="btn btn-outline-danger" id="reset-detail">Reset</button>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="drug_id" class="form-label">Nama Obat</label>
-                                <select name="drug_id" id="drug_id" class="form-select">
-                                    <option value="" selected disabled>-- Pilih Obat --</option>
-                                    <option value="1" data-name="paracetamol">Paracetamol</option>
+                                <select name="drug_id" id="drug_id">
                                 </select>
                                 <span id="drug-same" class="text-danger mt-2 small"></span>
                             </div>
@@ -139,7 +138,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetDetailAll()">Close</button>
               <button type="button" class="btn btn-primary" onclick="postData()">Save changes</button>
             </div>
           </div>
@@ -149,11 +148,36 @@
 @endsection
 @section('script')
     <script>
+        $(document).ready(function() {
+            $('#drug_id').select2({
+                dropdownParent: $("#modal-data"),
+                theme: 'bootstrap-5', // Menggunakan tema Bootstrap 4
+                placeholder: 'Pilih obat',
+                minimumInputLength: 3, // Set minimum jumlah karakter sebelum pencarian dimulai
+                ajax: {
+                    url: `{{config('app.url')}}/api/v1/drugsearch`, // Ganti dengan URL pencarian pada server
+                    dataType: 'json',
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name
+                                };
+                            })
+                        };
+                    },
+                }
+            });
+        })
+
         let detailPayloads = []
 
-        const drugInput          = document.getElementById('drug_id' )
-        const requestAmountInput = document.getElementById('request_amount' )
-        const receiveAmountInput = document.getElementById('receive_amount' )
+        const drugInput          = document.getElementById('drug_id'         )
+        const requestAmountInput = document.getElementById('request_amount'  )
+        const receiveAmountInput = document.getElementById('receive_amount'  )
+        const jenisTransaksi     = document.getElementById('jenis_transaksi' )
+        const receiverId         = document.getElementById('receiver_id'     )
 
         function checkIfDrugReady() {
             const find = detailPayloads.find(item => item.drug_id === drugInput.value);
@@ -167,7 +191,7 @@
 
         const checkAndLog = () => {
 
-            if (!checkIfDrugReady() && drugInput.value != 0 && requestAmountInput.value != 0 && receiveAmountInput.value) {
+            if (!checkIfDrugReady() && drugInput.value != 0 && requestAmountInput.value != 0 && receiveAmountInput.value && jenisTransaksi.value && receiverId.value) {
                 $('#tambah-detail').prop('disabled', false);
             } else {
                 $('#tambah-detail').prop('disabled', true);
@@ -199,7 +223,7 @@
             const selectedOption = drugInput.options[drugInput.selectedIndex];
             detailPayloads.push({
                 'drug_id'        : drugInput .value ,
-                'drug_name'      : selectedOption .getAttribute('data-name').toUpperCase(),
+                'drug_name'      : $('#drug_id').select2('data')[0].text.toUpperCase(),
                 'request_amount' : requestAmountInput .value ,
                 'receive_amount' : receiveAmountInput .value ,
             })
@@ -208,11 +232,26 @@
         }
 
         function resetDetail() {
-            drugInput.value = ''
+            $('#drug_id').val(null).trigger('change')
             requestAmountInput.value = 0
             receiveAmountInput.value = 0
             $('#drug-same').html('')
             $('#tambah-detail').prop('disabled', true);
+        }
+
+        function resetDetailAll()
+        {
+            $('#drug_id').val(null).trigger('change')
+            requestAmountInput.value = 0
+            receiveAmountInput.value = 0
+            $('#drug-same').html('')
+            $('#tambah-detail').prop('disabled', true);
+
+            jenisTransaksi.value = ''
+            receiverId.value = ''
+
+            $('#tb-details').html('')
+            detailPayloads.length = 0
         }
 
         $(document).on('click', '#tambah-detail', function() {
