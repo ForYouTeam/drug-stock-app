@@ -33,7 +33,7 @@
 
               <li class="sidebar-item {{ (request()->is('receiver')) ? 'active' : '' }} ">
                 <a href="{{route('receiver')}}" class='sidebar-link'>
-                  <i class="bi-house-door-fill mt-1"></i>
+                    <i class="bi bi-people-fill"></i>
                     <span>Penerima</span>
                 </a>
             </li>

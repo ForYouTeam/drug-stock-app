@@ -2,6 +2,9 @@
 @section('title')
     Obat
 @endsection
+@section('logout')
+    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+@endsection
 @section('content')
 <div class="page-heading">
     <div class="page-title">
@@ -13,7 +16,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item">@yield('logout')</li>
                         <li class="breadcrumb-item active" aria-current="page">@yield('title')</li>
                     </ol>
                 </nav>
