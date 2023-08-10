@@ -93,14 +93,12 @@ class TransactionController extends Controller
                         'drug_id' => $findWarehouse['data']['drug_id']
                     ];
 
-                    if ($newStock < 0) {
-                        return response()->json(['message' => 'Data tidak dapat diproses, stok terlalu kecil'], 200); 
+                    if ($newStock >= 1) {
+                        $warehouseId = $findWarehouse['data']['id'];
+                        
+                        $updatedPayload['stock'] = $newStock;
+                        $this->warehouseRepo->upsertPayload($warehouseId, $updatedPayload);
                     }
-
-                    $warehouseId = $findWarehouse['data']['id'];
-                    
-                    $updatedPayload['stock'] = $newStock;
-                    $this->warehouseRepo->upsertPayload($warehouseId, $updatedPayload);
 
                 } else if ($findWarehouse['code'] == 404 && $request->jenis_transaksi != 'out') {
                     $updatedPayload = [
@@ -125,10 +123,23 @@ class TransactionController extends Controller
 
                 array_push($savedDetails, $saveTransaction);
             }
+
+            if (count($savedDetails) < 1) {
+                $transactionId = $transaction['data']['id'];
+
+                $this->transaksiRepo->deletePayload($transactionId);
+
+                return response()->json([
+                    'message' => 'Transaksi tidak dapat dilakukan'
+                ], 500);
+            }
+
             $result = [
                 'transaction' => $transaction,
                 'details' => $savedDetails
             ];
+
+            return response()->json($result, 200);
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -136,8 +147,6 @@ class TransactionController extends Controller
                 'line'    => $th->getLine()
             ], 500);
         }
-
-        return response()->json($result, 200);
 
     }
 

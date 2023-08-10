@@ -12,4 +12,9 @@ class Drug extends Model
     protected $fillable = [
         'name', 'created_at', 'updated_at'
     ];
+
+    public function warehouse()
+    {
+        return $this->hasOne(Warehouse::class, 'drug_id');
+    }
 }

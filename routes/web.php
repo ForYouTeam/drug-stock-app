@@ -29,13 +29,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
     Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
+    Route::get('/akun', function () {
+        return view('Pages/Acount');
+    });
 });
 
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
 Route::post('/auth/process', [AuthController::class, 'login'])->name('login.process');
-
-
-
-Route::get('/akun', function () {
-    return view('Pages/Acount');
-});

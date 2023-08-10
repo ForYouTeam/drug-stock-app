@@ -124,15 +124,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tb-details">
-                                    {{-- <tr>
-                                        <td>1.</td>
-                                        <td>Paracetamol</td>
-                                        <td>25</td>
-                                        <td>15</td>
-                                        <td>
-                                            <button class="btn btn-outline-danger">Hapus</button>
-                                        </td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -142,7 +133,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetDetailAll()">Close</button>
-              <button type="button" class="btn btn-primary" onclick="postData()">Save changes</button>
+              <button type="button" class="btn btn-primary" onclick="postData()" id="save-button">Save changes</button>
             </div>
           </div>
         </div>
@@ -163,11 +154,15 @@
                     processResults: function (data) {
                         return {
                             results: data.map(function(item) {
-                                return {
-                                    id: item.id,
-                                    text: item.name
-                                };
-                            })
+                                // Cek apakah item.transaction.stock adalah null dan id jenis_transaksi adalah "keluar"
+                                if (item.warehouse != null || $('#jenis_transaksi').val() != 'out') {
+                                    return {
+                                        id: item.id,
+                                        text: item.name,
+                                        stock: item.warehouse ? item.warehouse.stock : null
+                                    };
+                                }
+                            }).filter(Boolean) // Menghilangkan nilai yang null dari hasil filter di atas
                         };
                     },
                 }
@@ -193,7 +188,6 @@
         }
 
         const checkAndLog = () => {
-
             if (!checkIfDrugReady() && drugInput.value != 0 && requestAmountInput.value != 0 && receiveAmountInput.value && jenisTransaksi.value && receiverId.value) {
                 $('#tambah-detail').prop('disabled', false);
             } else {
@@ -224,14 +218,28 @@
 
         function addToDetails() {
             const selectedOption = drugInput.options[drugInput.selectedIndex];
-            detailPayloads.push({
-                'drug_id'        : drugInput .value ,
-                'drug_name'      : $('#drug_id').select2('data')[0].text.toUpperCase(),
-                'request_amount' : requestAmountInput .value ,
-                'receive_amount' : receiveAmountInput .value ,
-            })
-            
-            appendDetailsToTable(detailPayloads)
+            const selectedData = $('#drug_id').select2('data')[0]; // Dapatkan data terpilih dari Select2
+
+            if (selectedData.stock != null && jenisTransaksi.value == 'out' && parseInt(selectedData.stock) < 1) {
+                iziToast.error({
+                    title   : 'warning'                  ,
+                    message : 'Stok tidak cukup untuk penarikan keluar obat',
+                    position: 'topRight'
+                });
+            } else {
+                const newDetail = {
+                    'drug_id': selectedData.id,
+                    'drug_name': selectedData.text.toUpperCase(),
+                    'request_amount': requestAmountInput.value,
+                    'receive_amount': receiveAmountInput.value,
+                    'stock': selectedData.stock // Tambahkan informasi stock ke dalam detail
+                };
+                
+                detailPayloads.push(newDetail);
+                appendDetailsToTable(detailPayloads);
+
+            }
+
         }
 
         function resetDetail() {
@@ -287,8 +295,6 @@
                 }
             })
         })
-
-
 
     </script>
     <script>
@@ -380,43 +386,49 @@
                 detail: detailPayloads
             }
 
-            console.log(data);
-
-            $.ajax({
-                url        : `${baseUrl}/api/v1/transaction`,
-                method     : "POST"                   ,
-                data       : data                     ,
-                success: function(res) {
-                    $('#modal-data').modal('hide')
-                    iziToast.success({
-                        title   : 'Sukses'                 ,
-                        message : 'Data berhasil diproses!',
-                        position: 'bottomRight'
-                    });
-
-                    console.log(res);
-                    getAllData()
-                },
-                error: function(err) {
-                    if (err.status = 422) {
-                        console.log(err);
-                        let data = err.responseJSON
-                        let errorRes = data.errors;
-                        if (errorRes.length >= 1) {
-                            $.each(errorRes.data, (i, d) => {
-                                $(`#alert-${i}`).html(d)
-                            })
-                        }
-                    } else {
-                        iziToast.error({
-                            title   : 'Error'                    ,
-                            message : 'Server sedang maintenance',
-                            position: 'topRight'
+            if (detailPayloads.length >= 1) {
+                $.ajax({
+                    url        : `${baseUrl}/api/v1/transaction`,
+                    method     : "POST"                   ,
+                    data       : data                     ,
+                    success: function(res) {
+                        $('#modal-data').modal('hide')
+                        iziToast.success({
+                            title   : 'Sukses'                 ,
+                            message : 'Data berhasil diproses!',
+                            position: 'bottomRight'
                         });
-                    }
-                },
-                dataType   : "json"
-            });
+
+                        console.log(res);
+                        getAllData()
+                    },
+                    error: function(err) {
+                        if (err.status = 422) {
+                            console.log(err);
+                            let data = err.responseJSON
+                            let errorRes = data.errors;
+                            if (errorRes.length >= 1) {
+                                $.each(errorRes.data, (i, d) => {
+                                    $(`#alert-${i}`).html(d)
+                                })
+                            }
+                        } else {
+                            iziToast.error({
+                                title   : 'Error'                    ,
+                                message : 'Server sedang maintenance',
+                                position: 'topRight'
+                            });
+                        }
+                    },
+                    dataType   : "json"
+                });
+            } else {
+                iziToast.error({
+                    title   : 'warning'                  ,
+                    message : 'Detail transaksi belum terisi',
+                    position: 'topRight'
+                });
+            }
         }
 
         function getAllData() {

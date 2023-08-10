@@ -41,7 +41,7 @@ class DrugController extends Controller
         $term = $request->input('term'); // Ambil kata kunci pencarian dari permintaan
 
         // Lakukan pencarian berdasarkan kata kunci
-        $results = Drug::where('name', 'LIKE', "%$term%")->get();
+        $results = Drug::where('name', 'LIKE', "%$term%")->with('warehouse')->get();
 
         return response()->json($results, 200);
     }
