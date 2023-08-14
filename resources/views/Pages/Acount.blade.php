@@ -3,7 +3,7 @@
     Akun
 @endsection
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 @section('content')
 <div class="page-heading">

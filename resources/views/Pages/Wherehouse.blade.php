@@ -3,9 +3,16 @@
     Stok Obat
 @endsection
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 @section('content')
+<style>
+    .select2-selection{
+        height: auto !important;
+        padding: 2px;
+        border: silver 1px solid;
+    }
+</style>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -49,7 +56,7 @@
     </section>
       
       <!-- Modal -->
-      <div class="modal fade" id="modal-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-data" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -60,18 +67,20 @@
               <div>
                   <div class="form-group">
                       <input type="hidden" name="id" id="id">
-                      <label for="">Obat</label>
-                      <select name="drug_id" id="drug_id" class="form-select">
-                          <option value="">-- Pilih --</option>
-                          @foreach ($drug as $d)
-                              <option value="{{$d->id}}">{{$d->name}}</option>
-                          @endforeach
-                      </select>
+                      <label for="">Obat</label><br>
+                      <div class="col-lg-12">
+                        <select name="drug_id" id="drug_id" class="select2" style="width: 100%; padding: 100px>
+                            <option value="">-- Pilih --</option>
+                            @foreach ($drug as $d)
+                                <option value="{{$d->id}}">{{$d->name}}</option>
+                            @endforeach
+                        </select>
+                      </div>
                       <span class="text-danger" id="alert-drug_id"></span>
                   </div>
                 <div class="form-group">
                     <input type="hidden" name="id" id="id">
-                    <label for="">Sttock</label>
+                    <label for="">Stock</label>
                     <input type="number" name="stock" id="stock" class="form-control mt-2" placeholder="Input disini">
                     <span class="text-danger" id="alert-stock"></span>
                 </div>
