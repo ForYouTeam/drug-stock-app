@@ -42,7 +42,7 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'password' => $request->password,
-            'scope' => $request->scope
+            'scope' => 'admin'
         );
 
         $data = $this->repo->upsertPayload($payloadId, $payload);

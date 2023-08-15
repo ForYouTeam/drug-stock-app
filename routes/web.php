@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
   
-Route::get('/'            , [DashboardController   ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('dashboard'   );
+Route::get('/'            , [DashboardController   ::class, 'index'])->middleware(['auth' ])->name('dashboard'   );
 Route::get('/drugs'       , [DrugController        ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('drugs'       );
 Route::get('/warehouses'  , [WarehouseController   ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('warehouse'   );
 Route::get('/staff'       , [StaffController       ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('staff'       );

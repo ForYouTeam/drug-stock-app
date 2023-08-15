@@ -31,14 +31,13 @@
                   </a>
               </li>
 
-              @hasrole('super-admin')
               <li class="sidebar-item {{ (request()->is('receiver')) ? 'active' : '' }} ">
                 <a href="{{route('receiver')}}" class='sidebar-link'>
                     <i class="bi bi-people-fill"></i>
                     <span>Penerima</span>
                 </a>
               </li>
-              
+              @hasrole('super-admin')
               <li class="sidebar-item {{ (request()->is('drugs')) ? 'active' : '' }} ">
                   <a href="{{route('drugs')}}" class='sidebar-link'>
                       <i class="bi bi-droplet-fill mt-1"></i>

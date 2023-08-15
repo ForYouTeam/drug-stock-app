@@ -22,8 +22,8 @@
 <script src="{{ asset('assets/js/moment.min.js') }}"></script>
 <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
 <script src="{{ asset('assets/izitoast/js/iziToast.min.js') }}"></script>
-<script src="{{ asset('assets/select2/dist/js/select2.min.js') }}""></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></scri> --}}
+{{-- <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}""></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></scri>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js" integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {

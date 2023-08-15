@@ -77,12 +77,16 @@
                     <input type="password" name="password" id="password" class="form-control mt-2" placeholder="Masukan Password">
                     <span class="text-danger" id="alert-name"></span>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <input type="hidden" name="id" id="id">
                     <label for="">Role</label>
-                    <input type="text" name="scope" id="scope" class="form-control mt-2" placeholder="Input disini">
+                    <select name="scope" class="form-select" id="scope">
+                        <option value="" selected disabled>-- Pilih --</option>
+                        <option value="super-admin">Super admin</option>
+                        <option value="admin">Admin</option>
+                    </select>
                     <span class="text-danger" id="alert-name"></span>
-                </div>
+                </div> --}}
               </div>
             </div>
             <div class="modal-footer">
@@ -185,7 +189,7 @@
                 name     : $('#name'     ).val(),
                 username : $('#username' ).val(),
                 password : $('#password' ).val(),
-                scope    : $('#scope'    ).val(),
+                // scope    : $('#scope'    ).val(),
             }
 
             $.ajax({
@@ -229,8 +233,8 @@
             $.get(`${baseUrl}/api/v1/user`, (res) => {
                 let data = res.data
 
-                $('#tbody').html('')
-                $.each(data, (i,d) => {
+                $.each(data, (i, d) => {
+                if (d.scope !== 'super-admin') {
                     $('#tbody').append(`
                         <tr>
                             <td>${i + 1}</td>
@@ -240,12 +244,13 @@
                             <td>${moment(d.created_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>${moment(d.updated_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>
-                            <button id="btn-edit" data-id="${d.id}" class="btn rounded btn-sm btn-outline-primary mr-1">Edit</button>
-                            <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
+                                <button id="btn-edit" data-id="${d.id}" class="btn rounded btn-sm btn-outline-primary mr-1">Edit</button>
+                                <button id="btn-del" data-id="${d.id}" class="btn rounded btn-sm btn-outline-danger">Hapus</button>
                             </td>
                         </tr>
-                    `)
-                })
+                    `);
+                }
+            });
 
                 $('#tabel-data').DataTable();
             })

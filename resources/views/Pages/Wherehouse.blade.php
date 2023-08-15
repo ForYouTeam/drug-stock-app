@@ -42,8 +42,8 @@
                             <th>No</th>
                             <th>Obat</th>
                             <th>Stock</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>Tgl Dibuat</th>
+                            <th>Tgl Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>

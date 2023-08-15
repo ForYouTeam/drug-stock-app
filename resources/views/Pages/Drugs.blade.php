@@ -34,8 +34,8 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>Tgl Dibuat</th>
+                            <th>Tgl Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>
