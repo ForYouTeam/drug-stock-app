@@ -26,9 +26,39 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Tabel @yield('title') <button class="btn btn-primary float-end" onclick="tambahData()">Tambah Data</button>
+                Tabel @yield('title') 
+                <div>
+                    <form action="{{ route('transaction-export') }}" method="get">
+                        <div class="row mt-5">
+                            <div class="col-4">
+                                <label for="">Tgl Mulai</label>
+                                <input type="date" class="form-control" name="start_date" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="">Tgl Selesai</label>
+                                <input type="date" class="form-control" name="end_date" required>
+                            </div>
+                            <div class="col-2 mt-4">
+                                <button class="btn btn-primary" type="submit">Export</button>
+                            </div>
+                            <div class="col-2 mt-4">
+                                <button type="button" class="btn btn-primary float-end" onclick="tambahData()">Tambah Data</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <table class="table table-hover" id="tabel-data">
                     <thead>
                         <tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\TransactionExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Interfaces\ReceiverInterface;
@@ -15,6 +16,7 @@ use App\Repositories\WarehouseRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
@@ -154,5 +156,17 @@ class TransactionController extends Controller
     {
         $data = $this->transaksiRepo->deletePayload($id);
         return response()->json($data, $data['code']);
+    }
+
+    public function export(Request $request)
+    {
+        $data = $this->transaksiRepo->exportByDateRange($request->all());
+        if ($data) {
+            return Excel::download(new TransactionExport($data), 'data_export.xlsx');
+            // return back()->with('success', 'berhasil mengexport data');
+        } else {
+            return back()->with('error', 'Gagal mengexport data');
+        }
+        
     }
 }

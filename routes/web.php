@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/warehouses', [WarehouseController::class, 'index'])->name('warehouse');
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+    Route::get('/transaction/export', [TransactionController::class, 'export'])->name('transaction-export');
     Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
     Route::get('/akun', function () {
         return view('Pages/Acount');

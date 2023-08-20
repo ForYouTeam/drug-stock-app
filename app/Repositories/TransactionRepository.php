@@ -2,10 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Exports\TransactionExport;
 use App\Helper\ApiResponse;
 use App\Interfaces\TransactionInterface;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionRepository implements TransactionInterface
 {
@@ -90,4 +92,12 @@ class TransactionRepository implements TransactionInterface
     
     return $response;
   }
+
+  public function exportByDateRange($payload)
+    {
+        $startDate = $payload['start_date'];
+        $endDate = $payload['end_date'];
+        $data = Transaction::whereBetween('created_at', [$startDate, $endDate])->with('receiver')->get();
+        return $data;
+    }
 }
