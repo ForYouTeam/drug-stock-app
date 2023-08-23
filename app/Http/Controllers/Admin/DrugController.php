@@ -50,7 +50,9 @@ class DrugController extends Controller
     {
         $payloadId = $request->id | null;
         $payload = array(
-            'name' => $request->name
+            'name' => $request->name,
+            'unit' => $request->unit,
+            'desc' => $request->desc
         );
 
         $data = $this->repo->upsertPayload($payloadId, $payload);

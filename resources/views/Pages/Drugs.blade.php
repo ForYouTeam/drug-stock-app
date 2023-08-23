@@ -68,14 +68,14 @@
                 <div class="form-group">
                     <input type="hidden" name="id" id="id">
                     <label for="">Satuan</label>
-                    <input type="text" name="satuan" id="satuan" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
+                    <input type="text" name="unit" id="unit" class="form-control mt-2" placeholder="Input disini">
+                    <span class="text-danger" id="alert-unit"></span>
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="id" id="id">
                     <label for="">keterangan</label>
-                    <input type="text" name="keterangan" id="keterangan" class="form-control mt-2" placeholder="Input disini">
-                    <span class="text-danger" id="alert-name"></span>
+                    <input type="text" name="desc" id="desc" class="form-control mt-2" placeholder="Input disini">
+                    <span class="text-danger" id="alert-desc"></span>
                 </div>
               </div>
             </div>
@@ -94,12 +94,18 @@
 
         function tambahData(){
             $('#name').val('');
+            $('#unit').val('');
+            $('#desc').val('');
             $('#alert-name').html('');
+            $('#alert-unit').html('');
+            $('#alert-desc').html('');
             $('#modal-data').modal('show')   
         }
 
         function clearInput() {
             $('#alert-name').html('');
+            $('#alert-unit').html('');
+            $('#alert-desc').html('');
         }
 
         $(document).on('click', '#btn-del', function() {
@@ -174,7 +180,9 @@
         function postData() {
             const data = {
                 id   : $('#id'   ).val(),
-                name : $('#name' ).val()
+                name : $('#name' ).val(),
+                unit : $('#unit' ).val(),
+                desc : $('#desc' ).val()
             }
 
             $.ajax({
@@ -224,8 +232,8 @@
                         <tr>
                             <td>${i + 1}</td>
                             <td class="text-capitalize">${d.name}</td>
-                            <td class="text-capitalize"></td>
-                            <td class="text-capitalize"></td>
+                            <td class="text-capitalize">${d.unit}</td>
+                            <td class="text-capitalize">${d.desc}</td>
                             <td>${moment(d.created_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>${moment(d.updated_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>
