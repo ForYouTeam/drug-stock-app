@@ -29,7 +29,6 @@ class UserRequest extends FormRequest
             'name' => 'required|min:2|max:150',
             'username' => 'required|min:2|max:150',
             'password' => 'required',
-            'scope' => 'required',
         ];
     }
 

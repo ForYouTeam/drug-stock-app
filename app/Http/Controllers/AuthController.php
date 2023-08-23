@@ -9,39 +9,38 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function index ()
     {
-        return view('Auth.Login');
+        if (Auth::check()) {
+            return redirect(route('dashboard'));
+        } else {
+            return view('Auth.Login');
+        }
     }
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->getCredentials();
+        $credentials = $request->validate([
+            'username' => ['required', 'min:4'],
+            'password' => ['required', 'min:5'],
+        ]);
 
-        if(!Auth::validate($credentials)):
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-            return redirect()->to('auth')
-                ->withErrors([
-                    'email' => "Periksa Kembali Username dan Password anda",
-                ]);
-        endif;
-
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
-        Auth::login($user);
-
-        return $this->authenticated($request, $user);
+            return redirect(route('dashboard'));
+        }
+        return back()->with('statusErr', 'Username atau password salah');
     }
 
-    protected function authenticated(Request $request, $user) 
+    public function logout(Request $request)
     {
-        return redirect()->intended('/');
-    }
-
-    public function perform()
-    {
-        Session::flush();
         Auth::logout();
-        return redirect('auth');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect(route('login'))->with('status', 'Berhasil Logout');
     }
 }

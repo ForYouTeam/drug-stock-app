@@ -3,7 +3,7 @@
     Obat
 @endsection
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 @section('content')
 <div class="page-heading">
@@ -34,8 +34,10 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>Satuan</th>
+                            <th>Keterangan</th>
+                            <th>Tgl Dibuat</th>
+                            <th>Tgl Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,6 +63,18 @@
                     <input type="hidden" name="id" id="id">
                     <label for="">Nama Obat</label>
                     <input type="text" name="name" id="name" class="form-control mt-2" placeholder="Input disini">
+                    <span class="text-danger" id="alert-name"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="id" id="id">
+                    <label for="">Satuan</label>
+                    <input type="text" name="satuan" id="satuan" class="form-control mt-2" placeholder="Input disini">
+                    <span class="text-danger" id="alert-name"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="id" id="id">
+                    <label for="">keterangan</label>
+                    <input type="text" name="keterangan" id="keterangan" class="form-control mt-2" placeholder="Input disini">
                     <span class="text-danger" id="alert-name"></span>
                 </div>
               </div>
@@ -210,6 +224,8 @@
                         <tr>
                             <td>${i + 1}</td>
                             <td class="text-capitalize">${d.name}</td>
+                            <td class="text-capitalize"></td>
+                            <td class="text-capitalize"></td>
                             <td>${moment(d.created_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>${moment(d.updated_at).locale('id').format('DD, MMMM YYYY')}</td>
                             <td>
