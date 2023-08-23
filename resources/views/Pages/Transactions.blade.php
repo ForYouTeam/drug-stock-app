@@ -3,7 +3,7 @@
     Transaksi
 @endsection
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 @section('content')
 <div class="page-heading">
@@ -64,10 +64,10 @@
                         <tr>
                             <th style="width: 5%">No</th>
                             <th>Name</th>
-                            <th>Total In</th>
-                            <th>Total Out</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>Total Masuk</th>
+                            <th>Total Keluar</th>
+                            <th>Tgl Dibuat</th>
+                            <th>Tgl Diupdate</th>
                             <th style="width: 10%">Action</th>
                         </tr>
                     </thead>

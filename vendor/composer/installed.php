@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '51cb16718048a9eddba2e6a75415c536e1b19ee1',
+        'pretty_version' => 'dev-development',
+        'version' => 'dev-development',
+        'reference' => 'e1349e50fba48c1623e38713aae3a280ce092e69',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -374,9 +374,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '51cb16718048a9eddba2e6a75415c536e1b19ee1',
+            'pretty_version' => 'dev-development',
+            'version' => 'dev-development',
+            'reference' => 'e1349e50fba48c1623e38713aae3a280ce092e69',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -976,6 +976,15 @@
             'install_path' => __DIR__ . '/../spatie/laravel-ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-permission' => array(
+            'pretty_version' => '5.10.2',
+            'version' => '5.10.2.0',
+            'reference' => '671e46e079cbd4990a98427daaa09f4977b57ca9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-permission',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.3.0',

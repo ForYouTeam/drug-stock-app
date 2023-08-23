@@ -36,8 +36,8 @@
                     <i class="bi bi-people-fill"></i>
                     <span>Penerima</span>
                 </a>
-            </li>
-
+              </li>
+              @hasrole('super-admin')
               <li class="sidebar-item {{ (request()->is('drugs')) ? 'active' : '' }} ">
                   <a href="{{route('drugs')}}" class='sidebar-link'>
                       <i class="bi bi-droplet-fill mt-1"></i>
@@ -46,11 +46,12 @@
               </li>
 
               <li class="sidebar-item {{ (request()->is('staff')) ? 'active' : '' }} ">
-                  <a href="{{route('staff')}}" class='sidebar-link'>
+                <a href="{{route('staff')}}" class='sidebar-link'>
                     <i class="bi-person-fill mt-1"></i>
-                      <span>Staff</span>
-                  </a>
-              </li>
+                    <span>Staff</span>
+                </a>
+            </li>
+            @endhasrole
 
               <li class="sidebar-item  {{ (request()->is('transaction')) ? 'active' : '' }} ">
                 <a href="{{route('transaction')}}" class='sidebar-link'>
@@ -59,14 +60,15 @@
                 </a>
               </li>
 
+              @hasrole('super-admin')
               <li class="sidebar-title">Settings</li>
-
               <li class="sidebar-item {{ (request()->is('akun')) ? 'active' : '' }} ">
-                <a href="{{'/akun'}}" class='sidebar-link'>
+                <a href="{{route('akun')}}" class='sidebar-link'>
                     <i class="bi-person-plus-fill mt-1"></i>
                     <span>Manajemen Akun</span>
                 </a>
               </li>
+              @endhasrole
           </ul>
       </div>
       <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

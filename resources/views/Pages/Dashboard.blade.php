@@ -3,7 +3,7 @@
     Dashboard
 @endsection
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 @section('content')
 <div class="page-heading">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Data Peneriam</h6>
+                                    <h6 class="text-muted font-semibold">Data Penerima</h6>
                                     <h6 class="font-extrabold mb-0">{{$data['penerima']}}</h6>
                                 </div>
                             </div>

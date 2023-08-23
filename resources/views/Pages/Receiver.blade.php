@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 @section('logout')
-    <a href="{{route('logout.perform')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
+    <a href="{{route('logout')}}"><i class="bi bi-door-closed"></i><b>&nbsp;Logout</b></a>
 @endsection
 <div class="page-heading">
     <div class="page-title">
@@ -36,8 +36,8 @@
                             <th>Nama</th>
                             <th>Jenis</th>
                             <th>Alamat</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>Tgl Dibuat</th>
+                            <th>Tgl Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>

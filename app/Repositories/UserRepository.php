@@ -67,6 +67,7 @@ class UserRepository implements UserInterface
         $payload['password'] = $hash;
         $created  = User::create($payload);
         $response = ApiResponse::successRes($created, "success create data", 200);
+        $created->assignRole('admin');
       }
 
     } catch (\Throwable $th) {
