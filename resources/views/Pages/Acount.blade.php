@@ -38,7 +38,7 @@
                             <th>Role</th>
                             <th>Created_at</th>
                             <th>Updated_at</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">

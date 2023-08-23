@@ -38,7 +38,7 @@
                             <th>Keterangan</th>
                             <th>Tgl Dibuat</th>
                             <th>Tgl Update</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">

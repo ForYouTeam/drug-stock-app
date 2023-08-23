@@ -68,7 +68,7 @@
                             <th>Total Keluar</th>
                             <th>Tgl Dibuat</th>
                             <th>Tgl Diupdate</th>
-                            <th style="width: 10%">Action</th>
+                            <th style="width: 10%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
