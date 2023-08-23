@@ -16,6 +16,8 @@ class DrugFactory extends Factory
 
         return [
             'name' => $this->faker->unique()->medicine,
+            'unit' => $this->faker->randomElement(['tablet', 'capsule', 'ml', 'mg']),
+            'desc' => '',
         ];
     }
 }
