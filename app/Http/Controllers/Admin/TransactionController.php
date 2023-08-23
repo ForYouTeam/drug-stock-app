@@ -163,7 +163,6 @@ class TransactionController extends Controller
         $data = $this->transaksiRepo->exportByDateRange($request->all());
         if ($data) {
             return Excel::download(new TransactionExport($data), 'data_export.xlsx');
-            // return back()->with('success', 'berhasil mengexport data');
         } else {
             return back()->with('error', 'Gagal mengexport data');
         }

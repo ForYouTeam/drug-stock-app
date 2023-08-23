@@ -27,6 +27,7 @@ Route::get('/drugs'       , [DrugController        ::class, 'index'])->middlewar
 Route::get('/warehouses'  , [WarehouseController   ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('warehouse'   );
 Route::get('/staff'       , [StaffController       ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('staff'       );
 Route::get('/transaction' , [TransactionController ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('transaction' );
+Route::get('/transaction/export' , [TransactionController ::class, 'export'])->middleware(['auth', 'role:super-admin|admin' ])->name('transaction-export' );
 Route::get('/receiver'    , [ReceiverController    ::class, 'index'])->middleware(['auth', 'role:super-admin|admin' ])->name('receiver'    );
 Route::get('/akun'        , [UserController        ::class, 'index'])->middleware(['auth', 'role:super-admin'       ])->name('akun'    );
 

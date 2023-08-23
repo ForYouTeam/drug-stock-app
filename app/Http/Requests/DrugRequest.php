@@ -26,7 +26,9 @@ class DrugRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:150'
+            'name' => 'required|min:2|max:150',
+            'unit' => 'required|min:2|max:150',
+            'desc' => 'required|min:2|max:150'
         ];
     }
 
