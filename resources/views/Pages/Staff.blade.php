@@ -223,7 +223,7 @@
         }
 
         function getAllData() {
-            $('#table-data').DataTable().destroy()
+            $('#tabel-data').DataTable().destroy()
             $.get(`${baseUrl}/api/v1/staff`, (res) => {
                 let data = res.data
 
@@ -247,12 +247,11 @@
                 $('#tabel-data').DataTable();
             })
             .fail((err) => {
-                console.log(err);
-                // iziToast.error({
-                //     title   : 'Error'                    ,
-                //     message : 'Server sedang maintenance',
-                //     position: 'topRight'
-                // });
+                iziToast.error({
+                    title   : 'Error'                    ,
+                    message : 'Server sedang maintenance',
+                    position: 'topRight'
+                });
             })
         }
 
