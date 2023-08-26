@@ -462,7 +462,7 @@
         }
 
         function getAllData() {
-            $('#table-data').DataTable().destroy()
+            $('#tabel-data').DataTable().destroy()
             $.get(`${baseUrl}/api/v1/transaction`, (res) => {
                 let data = res.data
 

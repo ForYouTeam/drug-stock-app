@@ -229,7 +229,7 @@
         }
 
         function getAllData() {
-            $('#table-data').DataTable().destroy()
+            $('#tabel-data').DataTable().destroy()
             $.get(`${baseUrl}/api/v1/user`, (res) => {
                 let data = res.data
 

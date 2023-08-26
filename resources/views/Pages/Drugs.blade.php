@@ -265,12 +265,11 @@
                 });
             })
             .fail((err) => {
-                console.log(err);
-                // iziToast.error({
-                //     title   : 'Error'                    ,
-                //     message : 'Server sedang maintenance',
-                //     position: 'topRight'
-                // });
+                iziToast.error({
+                    title   : 'Error'                    ,
+                    message : 'Server sedang maintenance',
+                    position: 'topRight'
+                });
             })
         }
 

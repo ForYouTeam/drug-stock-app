@@ -16,7 +16,15 @@
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Silahkan login untuk masuk kedalam dashboard.</p>
-
+                    @if (session('status'))
+                        <div class="alert alert-success text-center">
+                        {{ session('status') }}
+                        </div>
+                    @elseif(session('statusErr'))
+                        <div class="alert alert-danger text-center">
+                        {{ session('statusErr') }}
+                        </div>
+                    @endif
                     <form action="{{ route('login.process') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
