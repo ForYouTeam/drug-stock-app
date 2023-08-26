@@ -222,7 +222,7 @@
         }
 
         function getAllData() {
-            $('#table-data').DataTable().destroy()
+            $('#tabel-data').DataTable().destroy()
             $.get(`${baseUrl}/api/v1/drug`, (res) => {
                 let data = res.data
 
